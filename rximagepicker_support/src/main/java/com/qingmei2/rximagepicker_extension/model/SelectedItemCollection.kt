@@ -21,6 +21,7 @@ import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import com.qingmei2.rximagepicker_extension.R
+import com.qingmei2.rximagepicker_extension.StoreSelectedImage
 import com.qingmei2.rximagepicker_extension.entity.IncapableCause
 import com.qingmei2.rximagepicker_extension.entity.Item
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec
@@ -196,7 +197,8 @@ class SelectedItemCollection(private val mContext: Context) {
     }
 
     fun count(): Int {
-        return mItems!!.size
+        return StoreSelectedImage.storeItems?.size
+//        return mItems!!.size
     }
 
     fun checkedNumOf(item: Item): Int {

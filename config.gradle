@@ -15,7 +15,7 @@ project.ext {
     constants = [
             siteUrl: "https://github.com/qingmei2/RxImagePicker",
             gitUrl : "https://github.com/qingmei2/RxImagePicker.git",
-            group  : "com.github.qingmei2"
+            group  : "com.github.cheekiat"
     ]
 
     dependencies = [

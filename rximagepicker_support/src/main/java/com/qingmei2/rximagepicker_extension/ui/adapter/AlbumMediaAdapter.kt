@@ -27,6 +27,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.qingmei2.rximagepicker_extension.R
+import com.qingmei2.rximagepicker_extension.StoreSelectedImage
 import com.qingmei2.rximagepicker_extension.entity.Album
 import com.qingmei2.rximagepicker_extension.entity.IncapableCause
 import com.qingmei2.rximagepicker_extension.entity.Item
@@ -148,19 +149,23 @@ open class AlbumMediaAdapter(context: Context,
             val checkedNum = mSelectedCollection.checkedNumOf(item)
             if (checkedNum == CheckView.UNCHECKED) {
                 if (assertAddSelection(holder.itemView.context, item)) {
+                    StoreSelectedImage.storeItems.add(item)
                     mSelectedCollection.add(item)
                     notifyCheckStateChanged()
                 }
             } else {
+                StoreSelectedImage.storeItems.remove(item)
                 mSelectedCollection.remove(item)
                 notifyCheckStateChanged()
             }
         } else {
             if (mSelectedCollection.isSelected(item)) {
+                StoreSelectedImage.storeItems.remove(item)
                 mSelectedCollection.remove(item)
                 notifyCheckStateChanged()
             } else {
                 if (assertAddSelection(holder.itemView.context, item)) {
+                    StoreSelectedImage.storeItems.add(item)
                     mSelectedCollection.add(item)
                     notifyCheckStateChanged()
                 }

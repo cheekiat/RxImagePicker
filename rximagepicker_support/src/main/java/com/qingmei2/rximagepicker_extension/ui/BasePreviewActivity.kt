@@ -26,6 +26,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.qingmei2.rximagepicker_extension.R
+import com.qingmei2.rximagepicker_extension.StoreSelectedImage
 import com.qingmei2.rximagepicker_extension.entity.IncapableCause
 import com.qingmei2.rximagepicker_extension.entity.Item
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec
@@ -98,6 +99,7 @@ abstract class BasePreviewActivity : AppCompatActivity(), ViewPager.OnPageChange
         mCheckView.setOnClickListener {
             val item = mAdapter.getMediaItem(mPager.currentItem)
             if (mSelectedCollection.isSelected(item)) {
+                StoreSelectedImage.storeItems.remove(item)
                 mSelectedCollection.remove(item)
                 if (mSpec.countable) {
                     mCheckView.setCheckedNum(CheckView.UNCHECKED)
@@ -106,6 +108,7 @@ abstract class BasePreviewActivity : AppCompatActivity(), ViewPager.OnPageChange
                 }
             } else {
                 if (assertAddSelection(item)) {
+                    StoreSelectedImage.storeItems.add(item)
                     mSelectedCollection.add(item)
                     if (mSpec.countable) {
                         mCheckView.setCheckedNum(mSelectedCollection.checkedNumOf(item))
