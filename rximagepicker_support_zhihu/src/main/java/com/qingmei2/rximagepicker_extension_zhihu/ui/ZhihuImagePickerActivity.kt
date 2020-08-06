@@ -62,8 +62,26 @@ class ZhihuImagePickerActivity : AppCompatActivity(), AlbumMediaAdapter.OnPhotoC
                             viewContainer = R.id.fl_container,
                             configuration = null
                     )
-                    pickImage().subscribe(observer)
+                    pickImage().subscribe(observerCamera)
                 }
+    }
+
+    private val observerCamera = object : Observer<Result> {
+
+        override fun onComplete(){
+
+        }
+
+        override fun onSubscribe(p0: Disposable) {
+            // do nothing
+        }
+
+        override fun onNext(result: Result) =
+                ActivityPickerViewController.instance.emitResult(result = result)
+
+        override fun onError(e: Throwable) =
+                ActivityPickerViewController.instance.emitError(e)
+
     }
 
     private val observer = object : Observer<Result> {

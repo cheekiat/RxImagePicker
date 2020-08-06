@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.qingmei2.rximagepicker_extension.R
+import com.qingmei2.rximagepicker_extension.StoreSelectedImage
 import com.qingmei2.rximagepicker_extension.entity.Album
 import com.qingmei2.rximagepicker_extension.entity.Item
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec
@@ -72,6 +73,10 @@ class ZhihuImageListGridFragment : Fragment(), AlbumMediaAdapter.CheckStateListe
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val album = arguments!!.getParcelable<Album>(EXTRA_ALBUM)
+
+        if(StoreSelectedImage.storeItems != null) {
+            mSelectionProvider?.provideSelectedItemCollection()?.setDefaultSelection(StoreSelectedImage.storeItems)
+        }
 
         mAdapter = AlbumMediaAdapter(
                 context = context!!,
