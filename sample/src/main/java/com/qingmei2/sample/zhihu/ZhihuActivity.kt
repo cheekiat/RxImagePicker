@@ -112,24 +112,10 @@ class ZhihuActivity : AppCompatActivity() {
         }
 
         override fun onNext(result: Result) {
-            // Usage
-            // val isGif: Boolean
-            //  get() = if (mimeType == null) false else mimeType == MimeType.GIF.toString()
-            // val isImage: Boolean
-            //  get() = if (mimeType == null) false else mimeType == MimeType.JPEG.toString()
-            //        || mimeType == MimeType.PNG.toString()
-            //        || mimeType == MimeType.GIF.toString()
-            //        || mimeType == MimeType.BMP.toString()
-            //        || mimeType == MimeType.WEBP.toString()
-            val mimeType = result.getStringExtra(ZhihuImagePickerFragment.EXTRA_OPTIONAL_MIME_TYPE, "")
-            Log.d("tag", "mime types: $mimeType")
 
             var item = result.item
             if (item is Item) {
-//                val index = stores.indexOf(item)
-//                Log.d("tag", "mime types:" + item?.contentUri)
-//                if (index < 0)
-//                    stores.add(item)
+
                 arrayList.add(item)
 
             }
