@@ -285,7 +285,7 @@ class ZhihuImagePickerFragment : androidx.fragment.app.Fragment(), IGalleryCusto
     }
 
     private fun instanceResult(item: Item): Result {
-        return Result.Builder(item.contentUri)
+        return Result.Builder(item.contentUri,item)
                 .putStringExtra(EXTRA_OPTIONAL_MIME_TYPE, item.mimeType ?: "")
                 .build()
     }

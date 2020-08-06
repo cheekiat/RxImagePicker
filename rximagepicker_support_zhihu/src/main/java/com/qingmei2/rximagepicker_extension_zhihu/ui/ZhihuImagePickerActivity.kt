@@ -106,7 +106,8 @@ class ZhihuImagePickerActivity : AppCompatActivity(), AlbumMediaAdapter.OnPhotoC
     }
 
     override fun onBackPressed() {
-        closure()
+        finish()
+//        closure()
     }
 
     companion object {

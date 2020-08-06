@@ -10,10 +10,12 @@ import java.io.Serializable
 
 class Result private constructor(builder: Builder) {
 
+    var item: Any? = null
     val uri: Uri
     private val extraData: Bundle
 
     init {
+        this.item = builder.item
         this.uri = builder.uri
         this.extraData = builder.extraData
     }
@@ -50,7 +52,7 @@ class Result private constructor(builder: Builder) {
         return this.extraData.getParcelable(key)
     }
 
-    class Builder(val uri: Uri) {
+    class Builder(val uri: Uri,val item: Any? = null) {
 
         val extraData = Bundle()
 

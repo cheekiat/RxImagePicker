@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.qingmei2.rximagepicker.core.RxImagePicker
 import com.qingmei2.rximagepicker.entity.Result
 import com.qingmei2.rximagepicker_extension.MimeType
+import com.qingmei2.rximagepicker_extension.entity.Item
 import com.qingmei2.rximagepicker_extension_zhihu.ZhihuConfigurationBuilder
 import com.qingmei2.rximagepicker_extension_zhihu.ui.ZhihuImagePickerFragment
 import com.qingmei2.sample.R
@@ -21,6 +22,7 @@ import kotlinx.android.synthetic.main.activity_zhihu.*
 class ZhihuActivity : AppCompatActivity() {
 
     private lateinit var rxImagePicker: ZhihuImagePicker
+    var stores = ArrayList<Item>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,6 +83,7 @@ class ZhihuActivity : AppCompatActivity() {
                         .maxSelectable(9)
                         .countable(true)
                         .spanCount(4)
+                        .initSelected(stores)
                         .theme(R.style.Zhihu_Normal)
                         .build())
                 .subscribe(fetchUriObserver())
@@ -102,6 +105,8 @@ class ZhihuActivity : AppCompatActivity() {
 
     private fun fetchUriObserver(): Observer<Result> = object : Observer<Result> {
 
+        val arrayList = ArrayList<Item>()
+
         override fun onSubscribe(d: Disposable) {
 
         }
@@ -119,6 +124,15 @@ class ZhihuActivity : AppCompatActivity() {
             val mimeType = result.getStringExtra(ZhihuImagePickerFragment.EXTRA_OPTIONAL_MIME_TYPE, "")
             Log.d("tag", "mime types: $mimeType")
 
+            var item = result.item
+            if (item is Item) {
+//                val index = stores.indexOf(item)
+//                Log.d("tag", "mime types:" + item?.contentUri)
+//                if (index < 0)
+//                    stores.add(item)
+                arrayList.add(item)
+
+            }
             Glide.with(this@ZhihuActivity)
                     .load(result.uri)
                     .into(imageView)
@@ -130,7 +144,8 @@ class ZhihuActivity : AppCompatActivity() {
         }
 
         override fun onComplete() {
-
+            stores.clear()
+            stores.addAll(arrayList)
         }
     }
 

@@ -33,6 +33,8 @@ import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+import com.qingmei2.rximagepicker_extension.StoreSelectedImage
+import com.qingmei2.rximagepicker_extension.entity.Item
 
 class ZhihuConfigurationBuilder
 /**
@@ -95,6 +97,13 @@ class ZhihuConfigurationBuilder
      */
     fun countable(countable: Boolean): ZhihuConfigurationBuilder {
         mSelectionSpec.countable = countable
+
+        return this
+    }
+
+    fun initSelected(storeItems : ArrayList<Item>): ZhihuConfigurationBuilder {
+
+        mSelectionSpec.storeItems = storeItems
         return this
     }
 
@@ -243,6 +252,9 @@ class ZhihuConfigurationBuilder
     }
 
     fun build(): SelectionSpec {
+
+        StoreSelectedImage.storeItems.clear()
+        mSelectionSpec.storeItems?.let { StoreSelectedImage.storeItems.addAll(it) }
         if (mSelectionSpec.themeId == com.qingmei2.rximagepicker_extension.R.style.Theme_AppCompat_Light)
             mSelectionSpec.themeId = R.style.Zhihu_Normal
 

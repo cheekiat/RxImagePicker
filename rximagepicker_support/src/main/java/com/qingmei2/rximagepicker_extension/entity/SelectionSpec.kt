@@ -36,6 +36,7 @@ class SelectionSpec private constructor() : ICustomPickerConfiguration {
     var themeId: Int = 0
     var orientation: Int = 0
     var countable: Boolean = false
+    var storeItems : ArrayList<Item>? = null
     var maxSelectable: Int = 0
     var maxImageSelectable: Int = 0
     var maxVideoSelectable: Int = 0
